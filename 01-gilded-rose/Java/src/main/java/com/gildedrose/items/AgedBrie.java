@@ -10,9 +10,7 @@ public class AgedBrie extends SpecializedItem {
     @Override
     public void update() {
         increaseQuality();
-
         decreaseSellIn();
-
         if(isSellInBelowZero()) increaseQuality();
     }
 }

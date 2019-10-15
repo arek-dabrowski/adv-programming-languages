@@ -9,21 +9,26 @@ public class BackstagePass extends SpecializedItem {
 
     @Override
     public void update() {
-        increaseQuality();
-
-        if(isSellInBelow11()) increaseQuality();
-        if(isSellInBelow6()) increaseQuality();
+        if(isSellInBelow6()){
+            increaseQualityBy(3);
+        } else if(isSellInBelow11()){
+            increaseQualityBy(2);
+        } else increaseQuality();
 
         decreaseSellIn();
 
-        if(isSellInBelowZero()) item.quality = 0;
+        if(isSellInBelowZero()) setQualityToZero();
     }
 
     private boolean isSellInBelow11(){
-        return item.sellIn < 11;
+        return item.sellIn < 11 && !isSellInBelowZero();
     }
 
     private boolean isSellInBelow6(){
-        return item.sellIn < 6;
+        return item.sellIn < 6 && !isSellInBelowZero();
+    }
+
+    private void setQualityToZero(){
+        item.quality = 0;
     }
 }

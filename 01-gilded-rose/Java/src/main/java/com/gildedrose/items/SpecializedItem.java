@@ -3,6 +3,8 @@ package com.gildedrose.items;
 import com.gildedrose.Item;
 
 public abstract class SpecializedItem {
+    private static final int MAX_VALUE = 50;
+    private static final int MIN_VALUE = 0;
     protected Item item;
 
     public SpecializedItem(Item item){
@@ -12,15 +14,19 @@ public abstract class SpecializedItem {
     public abstract void update();
 
     private boolean isQualityNotMax(){
-        return item.quality < 50;
+        return item.quality < MAX_VALUE;
     }
 
     private boolean isQualityNotMin(){
-        return item.quality > 0;
+        return item.quality > MIN_VALUE;
     }
 
     protected void increaseQuality(){
         if(isQualityNotMax()) item.quality++;
+    }
+
+    protected void increaseQualityBy(int n){
+        for(int i = 0; i < n; i++) if(isQualityNotMax()) item.quality++;
     }
 
     protected void decreaseQuality(){
@@ -32,6 +38,6 @@ public abstract class SpecializedItem {
     }
 
     protected boolean isSellInBelowZero(){
-        return item.sellIn < 0;
+        return item.sellIn < MIN_VALUE;
     }
 }
