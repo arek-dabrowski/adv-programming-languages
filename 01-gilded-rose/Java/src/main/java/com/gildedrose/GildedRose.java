@@ -24,12 +24,7 @@ class GildedRose {
                     && !item.name.equals("Backstage passes to a TAFKAL80ETC concert")) { //all except aged brie and backstage passes
                 if (item.quality > 0) {
                     if (!item.name.equals("Sulfuras, Hand of Ragnaros")) { //all except aged brie, backstage passes and sulfuras
-                        /* TEST ITEM */
-                        if(item.name.equals("Test Object")) {
-                            DefaultItem di = new DefaultItem(item);
-                            di.update();
-                        }
-                        else item.quality = item.quality - 1; //quality decrease
+                        item.quality = item.quality - 1; //quality decrease
                     }
                 }
             } else { //aged brie and backstage passes
@@ -74,9 +69,11 @@ class GildedRose {
                 }
             }
         }
+    }
 
-        //TEST
-        System.out.println(((DefaultItem)specializedItems.get(1)).getItem());
-
+    public void updateQuality2(){
+        for(SpecializedItem item : specializedItems){
+            item.update();
+        }
     }
 }
