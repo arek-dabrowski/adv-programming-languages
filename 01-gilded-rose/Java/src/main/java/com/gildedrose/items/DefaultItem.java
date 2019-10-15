@@ -13,4 +13,8 @@ public class DefaultItem implements SpecializedItem {
         item.quality--;
         item.sellIn--;
     }
+
+    public Item getItem() {
+        return item;
+    }
 }
