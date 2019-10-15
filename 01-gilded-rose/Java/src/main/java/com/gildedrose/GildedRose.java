@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import com.gildedrose.items.DefaultItem;
+
 class GildedRose {
     Item[] items;
 
@@ -8,13 +10,17 @@ class GildedRose {
     }
 
     public void updateQuality() {
-
         for(Item item : items){
             if (!item.name.equals("Aged Brie")
                     && !item.name.equals("Backstage passes to a TAFKAL80ETC concert")) { //all except aged brie and backstage passes
                 if (item.quality > 0) {
                     if (!item.name.equals("Sulfuras, Hand of Ragnaros")) { //all except aged brie, backstage passes and sulfuras
-                        item.quality = item.quality - 1; //quality decrease
+                        /* TEST ITEM */
+                        if(item.name.equals("Test Object")) {
+                            DefaultItem di = new DefaultItem(item);
+                            di.update();
+                        }
+                        else item.quality = item.quality - 1; //quality decrease
                     }
                 }
             } else { //aged brie and backstage passes
