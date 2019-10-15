@@ -11,7 +11,11 @@ public abstract class SpecializedItem {
 
     public abstract void update();
 
-    public boolean hasReachedMaxQuality(){
-        return item.quality > 50;
+    protected boolean isQualityNotMax(){
+        return item.quality < 50;
+    }
+
+    protected boolean isQualityNotMin(){
+        return item.quality > 0;
     }
 }

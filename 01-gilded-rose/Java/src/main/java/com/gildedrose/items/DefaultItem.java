@@ -9,7 +9,7 @@ public class DefaultItem extends SpecializedItem {
 
     @Override
     public void update() {
-        if(!hasReachedMaxQuality()) item.quality--;
+        if(isQualityNotMin()) item.quality--;
         item.sellIn--;
     }
 }

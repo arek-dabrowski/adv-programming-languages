@@ -9,10 +9,12 @@ public class AgedBrie extends SpecializedItem {
 
     @Override
     public void update() {
-        if(!hasReachedMaxQuality()) {
+        if(isQualityNotMax()) {
             item.quality++;
         }
+
         item.sellIn--;
-        if(item.sellIn < 0 && !hasReachedMaxQuality()) item.quality++;
+
+        if(item.sellIn < 0 && isQualityNotMax()) item.quality++;
     }
 }
