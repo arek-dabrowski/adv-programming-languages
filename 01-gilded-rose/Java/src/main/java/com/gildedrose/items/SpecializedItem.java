@@ -11,11 +11,27 @@ public abstract class SpecializedItem {
 
     public abstract void update();
 
-    protected boolean isQualityNotMax(){
+    private boolean isQualityNotMax(){
         return item.quality < 50;
     }
 
-    protected boolean isQualityNotMin(){
+    private boolean isQualityNotMin(){
         return item.quality > 0;
+    }
+
+    protected void increaseQuality(){
+        if(isQualityNotMax()) item.quality++;
+    }
+
+    protected void decreaseQuality(){
+        if(isQualityNotMin()) item.quality--;
+    }
+
+    protected void decreaseSellIn(){
+        item.sellIn--;
+    }
+
+    protected boolean isSellInBelowZero(){
+        return item.sellIn < 0;
     }
 }

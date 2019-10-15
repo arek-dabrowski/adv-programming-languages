@@ -11,6 +11,8 @@ public class SpecializedItemFactory {
                 return new Sulfuras(item);
             case "Backstage passes to a TAFKAL80ETC concert":
                 return new BackstagePass(item);
+            case "Conjured Mana Cake":
+                return new ConjuredItem(item);
             default:
                 return new DefaultItem(item);
         }

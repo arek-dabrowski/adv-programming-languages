@@ -2,17 +2,15 @@ package com.gildedrose.items;
 
 import com.gildedrose.Item;
 
-public class AgedBrie extends SpecializedItem {
-    public AgedBrie(Item item){
+public class ConjuredItem extends SpecializedItem {
+    public ConjuredItem(Item item){
         super(item);
     }
 
     @Override
     public void update() {
-        increaseQuality();
-
+        decreaseQuality();
+        decreaseQuality();
         decreaseSellIn();
-
-        if(isSellInBelowZero()) increaseQuality();
     }
 }
