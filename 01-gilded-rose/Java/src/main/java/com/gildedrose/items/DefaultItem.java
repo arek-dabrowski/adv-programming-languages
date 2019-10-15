@@ -2,15 +2,14 @@ package com.gildedrose.items;
 
 import com.gildedrose.Item;
 
-public class DefaultItem implements SpecializedItem {
-    private Item item;
+public class DefaultItem extends SpecializedItem {
     public DefaultItem(Item item){
-        this.item = item;
+        super(item);
     }
 
     @Override
     public void update() {
-        item.quality--;
+        if(!hasReachedMaxQuality()) item.quality--;
         item.sellIn--;
     }
 }

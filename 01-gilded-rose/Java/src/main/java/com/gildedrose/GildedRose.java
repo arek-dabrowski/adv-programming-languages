@@ -1,6 +1,5 @@
 package com.gildedrose;
 
-import com.gildedrose.items.DefaultItem;
 import com.gildedrose.items.SpecializedItem;
 import com.gildedrose.items.SpecializedItemFactory;
 

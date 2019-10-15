@@ -2,19 +2,17 @@ package com.gildedrose.items;
 
 import com.gildedrose.Item;
 
-public class AgedBrie implements SpecializedItem {
-    private Item item;
-
+public class AgedBrie extends SpecializedItem {
     public AgedBrie(Item item){
-        this.item = item;
+        super(item);
     }
 
     @Override
     public void update() {
-        if(item.quality < 50) {
+        if(!hasReachedMaxQuality()) {
             item.quality++;
         }
         item.sellIn--;
-        if(item.sellIn < 0 && item.quality < 50) item.quality++;
+        if(item.sellIn < 0 && !hasReachedMaxQuality()) item.quality++;
     }
 }

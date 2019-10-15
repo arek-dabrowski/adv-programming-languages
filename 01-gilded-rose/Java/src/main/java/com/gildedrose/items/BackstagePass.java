@@ -2,21 +2,19 @@ package com.gildedrose.items;
 
 import com.gildedrose.Item;
 
-public class BackstagePass implements SpecializedItem {
-    private Item item;
-
+public class BackstagePass extends SpecializedItem {
     public BackstagePass(Item item){
-        this.item = item;
+        super(item);
     }
 
     @Override
     public void update() {
-        if(item.quality < 50) {
+        if(!hasReachedMaxQuality()) {
             item.quality++;
-            if (item.sellIn < 11 && item.quality < 50) {
+            if (item.sellIn < 11 && !hasReachedMaxQuality()) {
                 item.quality++;
             }
-            if (item.sellIn < 6 && item.quality < 50) {
+            if (item.sellIn < 6 && !hasReachedMaxQuality()) {
                 item.quality++;
             }
         }
