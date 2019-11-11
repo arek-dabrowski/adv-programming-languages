@@ -1,19 +1,19 @@
 package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.*;
 
-public class ConjuredTest {
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class DefaultItemTest {
     GildedRose app;
     Item[] items;
-    String itemName = "Conjured Mana Cake";
+    String itemName = "+5 Dexterity Vest";
     int sellIn = 5;
     int quality = 15;
     int numberOfUpdates = 3;
-    int dropRate = 2;
 
     @Test
-    void conjuredItem_ShouldCreateProperly() {
+    void defaultItem_ShouldCreateProperly() {
         items = new Item[] { new Item(itemName, 0, 0) };
         app = new GildedRose(items);
 
@@ -49,7 +49,7 @@ public class ConjuredTest {
         app = new GildedRose(items);
         app.updateQuality();
 
-        assertThat(app.items[0].quality).isEqualTo(quality - dropRate);
+        assertThat(app.items[0].quality).isEqualTo(quality - 1);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class ConjuredTest {
             app.updateQuality();
         }
 
-        assertThat(app.items[0].quality).isEqualTo(quality - dropRate * numberOfUpdates);
+        assertThat(app.items[0].quality).isEqualTo(quality - numberOfUpdates);
     }
 
     @Test
@@ -72,12 +72,12 @@ public class ConjuredTest {
         app = new GildedRose(items);
         app.updateQuality();
 
-        assertThat(app.items[0].quality).isEqualTo(quality - 2 * dropRate);
+        assertThat(app.items[0].quality).isEqualTo(quality - 2);
     }
 
     @Test
     void quality_ShouldDropProperly_WhenNegativeSellInAndUpdatedMultipleTimes() {
-        int sellIn = -2;
+        int sellIn = -3;
         items = new Item[] { new Item(itemName, sellIn, quality) };
 
         app = new GildedRose(items);
@@ -85,12 +85,12 @@ public class ConjuredTest {
             app.updateQuality();
         }
 
-        assertThat(app.items[0].quality).isEqualTo(quality - 2 * dropRate * numberOfUpdates);
+        assertThat(app.items[0].quality).isEqualTo(quality - 2 * numberOfUpdates);
     }
 
     @Test
     void quality_CannotBeNegative_WhenUpdatedOnce() {
-        int quality = 2;
+        int quality = 1;
         items = new Item[] { new Item(itemName, sellIn, quality) };
 
         app = new GildedRose(items);
@@ -101,7 +101,7 @@ public class ConjuredTest {
 
     @Test
     void quality_CannotBeNegative_WhenUpdatedMultipleTimes() {
-        int quality = 1;
+        int quality = 2;
         items = new Item[] { new Item(itemName, sellIn, quality) };
 
         app = new GildedRose(items);
