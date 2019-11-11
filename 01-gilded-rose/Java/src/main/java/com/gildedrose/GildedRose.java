@@ -20,54 +20,105 @@ class GildedRose {
     }
 
     private void modifyQualityWhenSellInAboveZero(Item item) {
-        if (!item.name.equals(AGED_BRIE)
-                && !item.name.equals(BACKSTAGE_PASSES)) {
+        if (isNotAgedBrieAndBackstagePasses(item)) {
             decreaseQuality(item);
         } else {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1;
+            if (isQualityLessThan50(item)) {
+                increaseQualityBy1(item);
 
-                if (item.name.equals(BACKSTAGE_PASSES)) {
-                    if (item.sellIn < 11 && item.quality < 50) {
-                            item.quality += 1;
+                if (isBackstagePasses(item)) {
+                    if (isTenDaysBeforeConcert(item)) {
+                        increaseQualityBy1(item);
                     }
 
-                    if (item.sellIn < 6 && item.quality < 50) {
-                            item.quality += 1;
+                    if (isFiveDaysBeforeConcert(item)) {
+                        increaseQualityBy1(item);
                     }
-                }
-            }
-        }
-    }
-
-    private void modifyQualityWhenSellInDropsToZero(Item item) {
-        if (item.sellIn < 0) {
-            if (!item.name.equals(AGED_BRIE)) {
-                if (!item.name.equals(BACKSTAGE_PASSES)) {
-                    decreaseQuality(item);
-                } else {
-                    item.quality = 0;
-                }
-            } else {
-                if (item.quality < 50) {
-                    item.quality += 1;
                 }
             }
         }
     }
 
     private void decreaseSellIn(Item item) {
-        if (!item.name.equals(SULFURAS)) {
-            item.sellIn -= 1;
+        if (!isSulfuras(item)) {
+            decreaseSellInBy1(item);
         }
     }
 
-    private void decreaseQuality(Item item) {
-        if (item.quality > 0 && !item.name.equals(SULFURAS)) {
-            item.quality -= 1;
-            if (item.name.equals(CONJURED) && item.quality != 0) {
-                item.quality -= 1;
+    private void modifyQualityWhenSellInDropsToZero(Item item) {
+        if (isSellInLessThanZero(item)) {
+            if (!isAgedBrie(item)) {
+                if (!isBackstagePasses(item)) {
+                    decreaseQuality(item);
+                } else {
+                    setQualityToZero(item);
+                }
+            } else {
+                if (isQualityLessThan50(item)) {
+                    increaseQualityBy1(item);
+                }
             }
         }
+    }
+
+    private boolean isSellInLessThanZero(Item item) {
+        return item.sellIn < 0;
+    }
+
+    private boolean isNotAgedBrieAndBackstagePasses(Item item) {
+        return !isAgedBrie(item) && !isBackstagePasses(item);
+    }
+
+    private boolean isFiveDaysBeforeConcert(Item item) {
+        return item.sellIn < 6 && isQualityLessThan50(item);
+    }
+
+    private boolean isTenDaysBeforeConcert(Item item) {
+        return item.sellIn < 11 && isQualityLessThan50(item);
+    }
+
+    private boolean isQualityLessThan50(Item item) {
+        return item.quality < 50;
+    }
+
+    private void increaseQualityBy1(Item item) {
+        item.quality += 1;
+    }
+
+    private void decreaseQuality(Item item) {
+        if (item.quality > 0 && !isSulfuras(item)) {
+            decreaseQualityBy1(item);
+            if (isConjured(item)) {
+                decreaseQualityBy1(item);
+            }
+        }
+    }
+
+    private void decreaseQualityBy1(Item item) {
+        item.quality -= 1;
+    }
+
+    private void decreaseSellInBy1(Item item) {
+        item.sellIn -= 1;
+    }
+
+    private void setQualityToZero(Item item) {
+        item.quality = 0;
+    }
+
+    private boolean isBackstagePasses(Item item) {
+        return item.name.equals(BACKSTAGE_PASSES);
+    }
+
+    private boolean isAgedBrie(Item item) {
+        return item.name.equals(AGED_BRIE);
+    }
+
+    private boolean isSulfuras(Item item) {
+        return item.name.equals(SULFURAS);
+    }
+
+    private boolean isConjured(Item item) {
+        return item.name.equals(CONJURED) && item.quality != 0;
     }
 }
