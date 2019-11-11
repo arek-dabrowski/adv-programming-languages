@@ -1,17 +1,18 @@
 package com.gildedrose;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
 public class GildedRoseTest {
 
     @Test
-    public void foo() {
+    void foo() {
         Item[] items = new Item[] { new Item("foo", 0, 0) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
-        assertEquals("fixme", app.items[0].name);
+        assertThat(app.items[0].name).isEqualToIgnoringCase("foo");
     }
 
 }
